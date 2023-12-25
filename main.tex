@@ -1,0 +1,79 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{amssymb}
+
+\title{Skupina 8-Metric independence number}
+\author{Živa Kocijan, Lucija Koprivec}
+\date{14.12.2023}
+
+\begin{document}
+\maketitle
+
+\section{Naloga}
+Najine naloge so:
+\begin{itemize}
+  \item Among trees $T$ on $n$ vertices, find trees with maximum/minimum $mi(T)$.
+  \item Find trees for which $dim(T) = mi(T)$. Here, $dim(T)$ is the classical vertex metric dimension.
+  \item Find trees for which $dim(T)\text{--} mi(T)$ is maximum/minimum.
+  \item Determine $mi(G)$ of a grid graph $G = P_{k} \square P_{t}$
+  \item Determine $mi(G)$ of a hypercube $G = Q_{d}$
+\end{itemize}
+
+
+\section{Osnovni pojmi}
+Naj bo $G$ graf. Točka $x$ grafa $G$ razreši dve točki $u$ in $v$ grafa $G$, če je
+razdalja med $x$ in $u$ različna od razdalje med $x$ in $v$.\\
+Niz $S$ oglišč $G$ je razrešujoča množica za $G$, če sta vsaki dve različni točki
+iz $G$ razrešeni z nekim ogliščem iz $S$. Najmanjša moč
+razrešujoče množice za $G$ se imenuje metrična dimenzija $G$ in jo označimo z $dim(G)$. \\
+Iskanje metrične dimezije grafa naj bi bil NP-popoln.\\
+Naprej, naj bo $V_{p}=\{\{x,y\}\, x,y \in V(G)\}$ in neka njena podmonžica $P$ je neodvisen razrešujoč nabor parov, če ni noben par iz P razrešen z istim ogliščem. Pri tem pa z $mi(G)$ označimo metrično neodvisno število grafa $G$, ki je moč največje množice P. \\
+Število $mi(G)$ je možno najti s pomočjo celoštevilskega linearnega programa.
+
+\section{Vrste grafov}
+\textbf{Drevo} je neusmerjen graf, v katerem sta katerikoli dve točki povezani z natanko eno potjo.\\
+\textbf{Hiperkocka} $Q_{d}$ je graf, ki ima $2^{n}$ vozlišč in vsako vozlišče je stopnje $n$. \\
+\textbf{Produkt grafov} $G\square H$, je nov graf, ki ima število oglišč enako $V(G)*V(H)$
+
+
+\section{NP-popolnost}
+V računalništvu je NP-popolnost ali NP-trdnost problema merilo težavnosti reševanja tega problema. Problem je NP-popoln, če ga je mogoče rešiti s polinomskim časovnim algoritmom in če je tudi NP-težek
+V angleščini je ime "NP-complete" okrajšava za "nondeterministic polynomial-time complete". 
+
+\section{CLP}
+Celoštevisli linearni program ali krajše CLP je matematični optimizacijski 
+problem, pri katerem je cilj maksimizirati oziroma minimizirati linearno 
+funkcijo celoštevilskih spremenljivk ob upoštevanju določenega nabora 
+linearnih enakosti in neenakosti.
+Drugače povedano, CLP je vrsta matematičnega programiranja, kjer so 
+celoštevilske vrednosti zahtevane za odločitvene spremenljivke.
+
+\section{Primer CLP-ja pri iskanju metrične dimenzije grafa}
+Naj bo G graf, potem definiramo 
+\begin{equation} 
+  a_{p,v} =
+    \begin{cases}
+      1& \text{če je $p \in V_{p}$ razrešen z $v \in V(G)$}\\
+      0& \text{sicer}
+    \end{cases}       
+\end{equation}
+\begin{align}
+max &\sum_{p \in V_{p}} y_{p} &\\ \nonumber
+    s.t. \sum_{p \in V_{p}} a_{p,v}y_{p} & \leq 1 &\text{za vsak} v \in V(G), \\ \nonumber
+    y_{p} & \in \{0,1\} &\text{za vsak} p \in V_{p}, \nonumber
+\end{align}
+kjer je $y_{p}=1$, če in samo če $p \in P$.
+
+\section{Primerjava vrednosti}
+Za vse grafe, ki jih označimo z $G$, velja neeakost:
+$$mi(G) \leq dim(G)$$
+Problem, če za dani graf $G$ v zgornji neenačbi velja enakost, je prav tako NP-popoln. \\
+Sledi, da je $0 \leq dim(G)-mi(G) \leq dim(G)$.\\
+
+\end{document}
